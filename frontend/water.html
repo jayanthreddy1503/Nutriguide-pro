@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Water Tracker — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/water.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li class="active"><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li><a href="nutrition-decoder.html"><i class="fas fa-tag"></i> Label Decoder</a></li>
+      <li><a href="heatwave.html"><i class="fas fa-temperature-high"></i> Heatwave Alert</a></li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Hydration</p>
+      <h1>Water Tracker 💧</h1>
+      <p>Stay hydrated, stay healthy</p>
+    </div>
+    <div class="topbar-right"><div class="avatar" id="userAvatar">U</div></div>
+  </div>
+
+  <div class="water-layout">
+    <div class="page-card water-visual-card">
+      <div class="water-bottle">
+        <div class="bottle-fill" id="bottleFill"></div>
+        <div class="bottle-label" id="bottleLabel">0%</div>
+      </div>
+      <div class="water-amount">
+        <span id="waterAmount">0</span><small>ml</small>
+      </div>
+      <p class="water-goal">Daily Goal: <strong id="goalDisplay">3000 ml</strong></p>
+
+      <div class="water-progress-wrap">
+        <div class="water-progress-bar">
+          <div class="water-progress-fill" id="waterFill"></div>
+        </div>
+        <span id="waterPct">0%</span>
+      </div>
+
+      <div class="water-btns">
+        <button class="w-btn" onclick="addWater(250)">+250 ml</button>
+        <button class="w-btn" onclick="addWater(500)">+500 ml</button>
+        <button class="w-btn reset" onclick="resetWater()"><i class="fas fa-rotate-left"></i> Reset</button>
+      </div>
+
+      <a href="dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+    </div>
+
+    <div class="water-info-col">
+      <div class="page-card">
+        <h2>Today's Log</h2>
+        <ul class="water-log" id="waterLog">
+          <li class="log-empty">No entries yet. Start drinking!</li>
+        </ul>
+      </div>
+      <div class="page-card water-tips-card">
+        <h2>💡 Hydration Tips</h2>
+        <ul class="tip-list">
+          <li>Drink a glass of water first thing in the morning.</li>
+          <li>Carry a water bottle with you throughout the day.</li>
+          <li>Eat water-rich foods like cucumbers, watermelon, and celery.</li>
+          <li>Set hourly reminders to take a sip.</li>
+          <li>Drink extra when you exercise or it's hot outside.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/water.js"></script>
+</body>
+</html>

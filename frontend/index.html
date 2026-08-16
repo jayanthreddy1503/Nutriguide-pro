@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NutriGuide Pro — Smart Nutrition & Health</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-leaf">🥬</span> NutriGuide <span class="logo-pro">Pro</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#stats">Stats</a></li>
+        <li><a href="login.html" class="btn-outline">Login</a></li>
+        <li><a href="register.html" class="btn-solid">Get Started</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features">Features</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-blur b1"></div>
+    <div class="hero-bg-blur b2"></div>
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fas fa-leaf"></i> Smart Health System</span>
+      <h1 class="hero-title">Your body.<br/><em>Your data.</em><br/>Your goals.</h1>
+      <p class="hero-sub">Track calories, BMI, hydration and diet plans — all in one intelligent platform designed for real results.</p>
+      <div class="hero-cta">
+        <a href="register.html" class="btn-solid big">Start for free</a>
+        <a href="#features" class="btn-ghost big">Explore features <i class="fas fa-arrow-down"></i></a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card fc1">
+        <i class="fas fa-weight-scale"></i>
+        <div>
+          <span class="fc-label">BMI</span>
+          <span class="fc-value">22.4 <small>Normal</small></span>
+        </div>
+      </div>
+      <div class="floating-card fc2">
+        <i class="fas fa-fire"></i>
+        <div>
+          <span class="fc-label">Calories</span>
+          <span class="fc-value">1840 <small>kcal/day</small></span>
+        </div>
+      </div>
+      <div class="floating-card fc3">
+        <i class="fas fa-droplet"></i>
+        <div>
+          <span class="fc-label">Water</span>
+          <span class="fc-value">2.4L <small>today</small></span>
+        </div>
+      </div>
+      <div class="hero-ring">
+        <svg viewBox="0 0 200 200" width="320" height="320">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#e8f5e9" stroke-width="16"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#3ecf8e" stroke-width="16"
+            stroke-dasharray="502" stroke-dashoffset="75" stroke-linecap="round"
+            transform="rotate(-90 100 100)" id="heroRing"/>
+          <text x="100" y="95" text-anchor="middle" font-size="28" font-weight="700" fill="#1a2e1a">92%</text>
+          <text x="100" y="115" text-anchor="middle" font-size="12" fill="#6b7b6b">Health Score</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="features">
+    <div class="section-label">What we offer</div>
+    <h2 class="section-title">Everything your health needs</h2>
+    <div class="features-grid">
+      <a href="feature-info.html?f=bmi" class="feat-card">
+        <div class="feat-icon" style="background:#e8f5e9;color:#2d9e6b"><i class="fas fa-weight-scale"></i></div>
+        <h3>BMI Calculator</h3>
+        <p>Instantly calculate your Body Mass Index and understand where you stand on the health spectrum.</p>
+        <span class="feat-learn">Learn more <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="feature-info.html?f=calories" class="feat-card">
+        <div class="feat-icon" style="background:#fff3e0;color:#e67e22"><i class="fas fa-fire-flame-curved"></i></div>
+        <h3>Calorie Tracking</h3>
+        <p>Know your daily caloric needs based on your age, goal, and activity level — scientifically calculated.</p>
+        <span class="feat-learn">Learn more <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="feature-info.html?f=water" class="feat-card">
+        <div class="feat-icon" style="background:#e3f2fd;color:#1976d2"><i class="fas fa-droplet"></i></div>
+        <h3>Water Tracker</h3>
+        <p>Log every sip. Stay on top of your daily hydration goal with a beautiful visual tracker.</p>
+        <span class="feat-learn">Learn more <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="feature-info.html?f=nutrition" class="feat-card">
+        <div class="feat-icon" style="background:#fce4ec;color:#c2185b"><i class="fas fa-heart-pulse"></i></div>
+        <h3>Nutrition Analysis</h3>
+        <p>Pick your symptoms and get targeted food recommendations to fix nutritional gaps.</p>
+        <span class="feat-learn">Learn more <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="feature-info.html?f=recipes" class="feat-card">
+        <div class="feat-icon" style="background:#fff8e1;color:#f57f17"><i class="fas fa-bowl-food"></i></div>
+        <h3>Healthy Recipes</h3>
+        <p>Click any food to get nutritious recipes with exact ingredients and step-by-step instructions.</p>
+        <span class="feat-learn">Learn more <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="feature-info.html?f=exercises" class="feat-card">
+        <div class="feat-icon" style="background:#e8eaf6;color:#3949ab"><i class="fas fa-dumbbell"></i></div>
+        <h3>Exercise Library</h3>
+        <p>Workouts by body part with how-to guides, sets, reps and calorie burn estimates.</p>
+        <span class="feat-learn">Learn more <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="feature-info.html?f=progress" class="feat-card">
+        <div class="feat-icon" style="background:#e0f7fa;color:#00838f"><i class="fas fa-chart-line"></i></div>
+        <h3>Progress Tracker</h3>
+        <p>See your journey visually with a live graph. Celebrate every milestone on your health journey.</p>
+        <span class="feat-learn">Learn more <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="feature-info.html?f=healthscore" class="feat-card">
+        <div class="feat-icon" style="background:#f3e5f5;color:#7b1fa2"><i class="fas fa-heart-pulse"></i></div>
+        <h3>Health Score</h3>
+        <p>A single score out of 100 that summarises your overall wellness across all tracked areas.</p>
+        <span class="feat-learn">Learn more <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section" id="stats">
+    <div class="stat-item">
+      <span class="stat-num" data-target="18">0</span><span class="stat-plus">+</span>
+      <p>Active Users</p>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="20">0</span><span class="stat-plus">+</span>
+      <p>Healthy Foods</p>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="10">0</span><span class="stat-plus">+</span>
+      <p>Diet Plans</p>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="15">0</span><span class="stat-plus">+</span>
+      <p>Symptoms Tracked</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo"><span class="logo-leaf">🥬</span> NutriGuide Pro</div>
+      <p>© 2026 NutriGuide Pro. Built for a healthier you.</p>
+      <div class="footer-links">
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/index.js"></script>
+</body>
+</html>

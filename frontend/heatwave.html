@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Heatwave & Climate Health Alert — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <link rel="stylesheet" href="css/heatwave.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle">
+  <i class="fas fa-bars"></i>
+</button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li><a href="nutrition-decoder.html"><i class="fas fa-tag"></i> Label Decoder</a></li>
+      <li class="active">
+        <a href="heatwave.html">
+          <i class="fas fa-temperature-high"></i> Heatwave Alert
+        </a>
+      </li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" id="logoutBtn">
+      <i class="fas fa-right-from-bracket"></i> Logout
+    </a>
+  </div>
+</aside>
+
+<main class="main-content">
+
+  <!-- PAGE HEADER -->
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Smart Tools</p>
+      <h1 style="font-family:'DM Serif Display',serif;">
+        🌡️ Heatwave & Climate Health Alert
+      </h1>
+      <p style="color:#6b7280;margin-top:4px;">
+        Real-time weather for Anantapur with personalised
+        hydration and cooling food tips.
+      </p>
+    </div>
+    <div class="topbar-right">
+      <div class="avatar" id="userAvatar">U</div>
+    </div>
+  </div>
+
+  <!-- HEATWAVE ALERT BANNER -->
+  <div class="hw-alert-banner" id="alertBanner"
+       style="display:none;">
+    <i class="fas fa-triangle-exclamation"></i>
+    <span id="alertBannerText">
+      ⚠️ HEATWAVE ALERT — Stay indoors.
+      Drink water every 30 minutes.
+    </span>
+  </div>
+
+  <!-- TOP ROW -->
+  <div class="hw-top-row">
+
+    <!-- WEATHER CARD -->
+    <div class="hw-weather-card" id="weatherCard">
+
+      <!-- Loading state -->
+      <div class="hw-weather-loading" id="weatherLoading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Fetching weather for Anantapur...</p>
+      </div>
+
+      <!-- Retry button shown on failure -->
+      <div id="retrySection" style="display:none;text-align:center;padding:16px;">
+        <p style="color:#9ca3af;font-size:13px;margin-bottom:10px;">
+          Could not load weather data.
+        </p>
+        <button class="hw-retry-btn" onclick="retryWeather()">
+          <i class="fas fa-rotate-right"></i> Retry
+        </button>
+      </div>
+
+      <!-- Weather content -->
+      <div id="weatherContent" style="display:none;">
+        <div class="hw-weather-top">
+          <div>
+            <p class="hw-location">
+              <i class="fas fa-location-dot"></i>
+              Anantapur, Andhra Pradesh
+            </p>
+            <div class="hw-temp-row">
+              <span class="hw-temp" id="tempDisplay">--°C</span>
+              <span class="hw-mode-badge" id="modeBadge">
+                Loading...
+              </span>
+            </div>
+            <p class="hw-condition" id="conditionDisplay">--</p>
+          </div>
+          <div class="hw-weather-icon" id="weatherIcon">🌤️</div>
+        </div>
+        <div class="hw-weather-stats">
+          <div class="hw-stat">
+            <i class="fas fa-droplet" style="color:#3b82f6"></i>
+            <span>Humidity</span>
+            <strong id="humidityDisplay">--%</strong>
+          </div>
+          <div class="hw-stat">
+            <i class="fas fa-wind" style="color:#10b981"></i>
+            <span>Feels Like</span>
+            <strong id="feelsLikeDisplay">--°C</strong>
+          </div>
+          <div class="hw-stat">
+            <i class="fas fa-clock" style="color:#f97316"></i>
+            <span>Updated</span>
+            <strong id="updatedDisplay">--</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WATER GOAL CARD -->
+    <div class="hw-water-goal-card" id="waterGoalCard">
+      <div class="hw-wg-header">
+        <div>
+          <p class="hw-wg-label">Today's Water Goal</p>
+          <h2 class="hw-wg-amount" id="waterGoalDisplay">3.0 L</h2>
+          <p class="hw-wg-reason" id="waterGoalReason">
+            Based on current temperature
+          </p>
+        </div>
+        <div class="hw-wg-icon">💧</div>
+      </div>
+      <div class="hw-wg-progress-row">
+        <span>
+          Consumed: <strong id="consumedDisplay">0 ml</strong>
+        </span>
+        <span id="progressPctDisplay">0%</span>
+      </div>
+      <div class="hw-wg-bar">
+        <div class="hw-wg-bar-fill" id="waterProgressBar"
+             style="width:0%"></div>
+      </div>
+      <div class="hw-wg-buttons">
+        <button class="hw-water-btn" onclick="logWater(250)">
+          +250 ml
+        </button>
+        <button class="hw-water-btn" onclick="logWater(500)">
+          +500 ml
+        </button>
+        <button class="hw-water-btn" onclick="logWater(1000)">
+          +1000 ml
+        </button>
+        <button class="hw-water-btn hw-reset-btn"
+                onclick="resetWater()">
+          <i class="fas fa-rotate-left"></i> Reset
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODE SECTION -->
+  <div class="hw-mode-section" id="modeSection">
+
+    <!-- NORMAL DAY -->
+    <div class="hw-mode-card hw-normal"
+         id="modeNormal" style="display:none;">
+      <div class="hw-mode-header">
+        <span class="hw-mode-title">🌤️ Normal Day</span>
+        <span class="hw-mode-temp" id="normalTemp"></span>
+      </div>
+      <p class="hw-mode-desc">
+        Temperature is comfortable today. Maintain balanced
+        meals and stay regularly hydrated.
+      </p>
+      <div class="hw-tips-grid">
+        <div class="hw-tip-card">
+          <span class="hw-tip-icon">🥗</span>
+          <p>Eat balanced meals with vegetables, protein,
+          and whole grains</p>
+        </div>
+        <div class="hw-tip-card">
+          <span class="hw-tip-icon">💧</span>
+          <p>Drink at least 8 glasses of water spread
+          throughout the day</p>
+        </div>
+        <div class="hw-tip-card">
+          <span class="hw-tip-icon">🚶</span>
+          <p>Light outdoor activity is perfectly fine
+          in this weather</p>
+        </div>
+        <div class="hw-tip-card">
+          <span class="hw-tip-icon">🍎</span>
+          <p>Include seasonal fruits and vegetables
+          in your diet today</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOT DAY -->
+    <div class="hw-mode-card hw-hot"
+         id="modeHot" style="display:none;">
+      <div class="hw-mode-header">
+        <span class="hw-mode-title">☀️ Hot Day</span>
+        <span class="hw-mode-temp" id="hotTemp"></span>
+      </div>
+      <p class="hw-mode-desc">
+        It is getting warm. Increase your water intake
+        and include cooling foods in your meals.
+      </p>
+      <h4 class="hw-section-label">
+        🥤 Cooling Foods Recommended Today
+      </h4>
+      <div class="hw-foods-grid">
+        <div class="hw-food-chip">🍉 Watermelon</div>
+        <div class="hw-food-chip">🥒 Cucumber</div>
+        <div class="hw-food-chip">🥛 Buttermilk</div>
+        <div class="hw-food-chip">🍋 Lemon Water</div>
+        <div class="hw-food-chip">🥥 Coconut Water</div>
+        <div class="hw-food-chip">🍈 Muskmelon</div>
+        <div class="hw-food-chip">🌿 Mint Drink</div>
+        <div class="hw-food-chip">🫐 Berries</div>
+      </div>
+      <div class="hw-tips-grid" style="margin-top:16px;">
+        <div class="hw-tip-card">
+          <span class="hw-tip-icon">⏰</span>
+          <p>Avoid outdoor activity between 11 AM and 4 PM</p>
+        </div>
+        <div class="hw-tip-card">
+          <span class="hw-tip-icon">👕</span>
+          <p>Wear light-coloured, loose cotton clothing</p>
+        </div>
+        <div class="hw-tip-card">
+          <span class="hw-tip-icon">💧</span>
+          <p>Drink water every 30 minutes even if not thirsty</p>
+        </div>
+        <div class="hw-tip-card">
+          <span class="hw-tip-icon">🏠</span>
+          <p>Keep your living space cool with fans or shade</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEATWAVE ALERT -->
+    <div class="hw-mode-card hw-heatwave"
+         id="modeHeatwave" style="display:none;">
+      <div class="hw-mode-header">
+        <span class="hw-mode-title">🔴 HEATWAVE ALERT</span>
+        <span class="hw-mode-temp" id="heatwaveTemp"></span>
+      </div>
+      <p class="hw-mode-desc">
+        Extreme heat detected. Take immediate precautions
+        to protect your health. Stay indoors and drink
+        water every 20–30 minutes.
+      </p>
+
+      <!-- Heatstroke warning -->
+      <div class="hw-warning-box">
+        <h4>
+          <i class="fas fa-triangle-exclamation"></i>
+          Know the Signs of Heatstroke
+        </h4>
+        <div class="hw-symptoms-grid">
+          <div class="hw-symptom">
+            <i class="fas fa-head-side-virus"></i>
+            Severe Headache
+          </div>
+          <div class="hw-symptom">
+            <i class="fas fa-dizzy"></i> Dizziness
+          </div>
+          <div class="hw-symptom">
+            <i class="fas fa-face-dizzy"></i> Nausea
+          </div>
+          <div class="hw-symptom">
+            <i class="fas fa-droplet-slash"></i> No Sweating
+          </div>
+          <div class="hw-symptom">
+            <i class="fas fa-brain"></i> Confusion
+          </div>
+          <div class="hw-symptom">
+            <i class="fas fa-thermometer-full"></i>
+            High Body Temp
+          </div>
+        </div>
+        <p class="hw-emergency-text">
+          <i class="fas fa-phone"></i>
+          If you or someone shows these signs — move to a
+          cool place immediately and seek emergency medical help.
+        </p>
+      </div>
+
+      <!-- ORS Recipe -->
+      <div class="hw-ors-box">
+        <h4>💊 ORS — Oral Rehydration Solution</h4>
+        <p>Prepare at home to restore electrolytes quickly:</p>
+        <div class="hw-ors-recipe">
+          <div class="hw-ors-item">
+            <span class="hw-ors-emoji">🚰</span>
+            <strong>1 Litre</strong>
+            <span>Clean Water</span>
+          </div>
+          <div class="hw-ors-plus">+</div>
+          <div class="hw-ors-item">
+            <span class="hw-ors-emoji">🍬</span>
+            <strong>6 tsp</strong>
+            <span>Sugar</span>
+          </div>
+          <div class="hw-ors-plus">+</div>
+          <div class="hw-ors-item">
+            <span class="hw-ors-emoji">🧂</span>
+            <strong>½ tsp</strong>
+            <span>Salt</span>
+          </div>
+        </div>
+        <p class="hw-ors-note">
+          Mix well and sip slowly throughout the day.
+        </p>
+      </div>
+
+      <!-- Cooling Foods -->
+      <h4 class="hw-section-label">
+        🧊 Cooling Foods — Consume Now
+      </h4>
+      <div class="hw-foods-grid">
+        <div class="hw-food-chip hw-food-urgent">
+          🍉 Watermelon
+        </div>
+        <div class="hw-food-chip hw-food-urgent">
+          🥥 Coconut Water
+        </div>
+        <div class="hw-food-chip hw-food-urgent">
+          🥛 Buttermilk
+        </div>
+        <div class="hw-food-chip hw-food-urgent">
+          🍋 Lemon ORS
+        </div>
+        <div class="hw-food-chip hw-food-urgent">
+          🥒 Cucumber
+        </div>
+        <div class="hw-food-chip hw-food-urgent">
+          🌿 Mint Water
+        </div>
+        <div class="hw-food-chip hw-food-urgent">
+          🍈 Muskmelon
+        </div>
+        <div class="hw-food-chip hw-food-urgent">
+          🫚 Aloe Juice
+        </div>
+      </div>
+
+      <!-- Do and Don't -->
+      <div class="hw-do-dont">
+        <div class="hw-do">
+          <h4>✅ Do This</h4>
+          <ul>
+            <li>Stay indoors between 10 AM – 5 PM</li>
+            <li>Drink water every 20–30 minutes</li>
+            <li>Use wet cloth on forehead and neck</li>
+            <li>Wear loose, light-coloured cotton clothes</li>
+            <li>Keep curtains closed to block sun</li>
+          </ul>
+        </div>
+        <div class="hw-dont">
+          <h4>❌ Avoid This</h4>
+          <ul>
+            <li>Avoid tea, coffee, and alcohol</li>
+            <li>Do not skip meals — eat light</li>
+            <li>Avoid dark-coloured clothing outdoors</li>
+            <li>Do not exercise outdoors during peak heat</li>
+            <li>Avoid heavy, oily, or spicy food</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FALLBACK SECTION -->
+  <div class="hw-fallback" id="fallbackSection"
+       style="display:none;">
+    <i class="fas fa-wifi"
+       style="font-size:32px;color:#9ca3af;margin-bottom:12px;">
+    </i>
+    <h3>Weather Data Unavailable</h3>
+    <p>
+      Could not fetch live weather. Showing general
+      hydration advice for Anantapur region.
+    </p>
+    <div class="hw-tips-grid" style="margin-top:20px;">
+      <div class="hw-tip-card">
+        <span class="hw-tip-icon">💧</span>
+        <p>Drink at least 3–4 litres of water daily
+        in Anantapur's climate</p>
+      </div>
+      <div class="hw-tip-card">
+        <span class="hw-tip-icon">🍉</span>
+        <p>Include watermelon, buttermilk, and coconut
+        water in your daily diet</p>
+      </div>
+      <div class="hw-tip-card">
+        <span class="hw-tip-icon">⏰</span>
+        <p>Avoid outdoor activity between 11 AM and
+        4 PM during summer</p>
+      </div>
+      <div class="hw-tip-card">
+        <span class="hw-tip-icon">👕</span>
+        <p>Wear light cotton clothes and carry water
+        when going outside</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="hw-disclaimer">
+    <i class="fas fa-droplet"></i>
+    <strong> Disclaimer:</strong> Hydration targets are general
+    recommendations for healthy adults in Anantapur district.
+    Consult a doctor for specific medical conditions or if you
+    experience heat-related symptoms.
+  </div>
+
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/heatwave.js"></script>
+</body>
+</html>

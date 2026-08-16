@@ -1,0 +1,47 @@
+.hs-layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
+.hs-main { text-align: center; }
+
+.hs-circle-wrap {
+  position: relative; display: inline-flex;
+  align-items: center; justify-content: center;
+  margin-bottom: 32px;
+}
+.hs-center {
+  position: absolute; display: flex; flex-direction: column; align-items: center;
+}
+.hs-center span { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: var(--text); line-height: 1; }
+.hs-center small { font-size: .8rem; color: var(--muted); font-weight: 600; }
+.hs-center p { font-size: .75rem; font-weight: 700; color: var(--green-dark); margin-top: 4px; text-transform: uppercase; letter-spacing: .04em; }
+
+.hs-breakdown { text-align: left; }
+.hs-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+}
+.hs-item:last-child { border-bottom: none; }
+.hs-item-left { display: flex; align-items: center; gap: 10px; font-size: .9rem; font-weight: 600; }
+.hs-item-left i { width: 20px; }
+.hs-item-right { display: flex; align-items: center; gap: 10px; }
+.hs-mini-bar { width: 80px; height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.hmb-fill { height: 100%; border-radius: 99px; width: 0%; transition: width .8s cubic-bezier(.4,0,.2,1); }
+.hmb-fill.green { background: #3ecf8e; }
+.hmb-fill.blue { background: #1976d2; }
+.hmb-fill.orange { background: #e67e22; }
+.hmb-fill.pink { background: #c2185b; }
+.hs-badge { font-size: .78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--green-light); color: var(--green-dark); white-space: nowrap; }
+
+.hs-explain { color: var(--muted); font-size: .88rem; line-height: 1.6; margin-bottom: 16px; }
+.score-tip { background: var(--green-light); color: var(--green-dark); border-radius: 12px; padding: 12px 16px; font-size: .85rem; font-weight: 600; }
+
+.quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.qa-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 8px; border-radius: 12px;
+  background: var(--bg); border: 1px solid var(--border);
+  text-decoration: none; color: var(--text);
+  font-size: .8rem; font-weight: 700; transition: background .2s;
+}
+.qa-btn i { font-size: 1.1rem; color: var(--green-dark); }
+.qa-btn:hover { background: var(--green-light); }
+
+@media (max-width: 800px) { .hs-layout { grid-template-columns: 1fr; } }

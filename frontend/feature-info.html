@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feature Info — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
+  <link rel="stylesheet" href="css/feature-info.css"/>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span class="logo-leaf">🥬</span> NutriGuide <span class="logo-pro">Pro</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html" class="btn-outline">Login</a></li>
+        <li><a href="register.html" class="btn-solid">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="fi-page">
+    <a href="index.html" class="fi-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+    <div class="fi-hero" id="fiHero">
+      <div class="fi-icon" id="fiIcon">🔬</div>
+      <div>
+        <p class="fi-tag" id="fiTag">Feature</p>
+        <h1 id="fiTitle">Feature Name</h1>
+      </div>
+    </div>
+
+    <div class="fi-grid">
+      <div class="fi-main">
+        <div class="fi-card">
+          <h2>What is it?</h2>
+          <p id="fiWhat"></p>
+        </div>
+        <div class="fi-card">
+          <h2>How does it work?</h2>
+          <ol class="fi-steps" id="fiHow"></ol>
+        </div>
+        <div class="fi-card">
+          <h2>Health Benefits</h2>
+          <ul class="fi-benefits" id="fiBenefits"></ul>
+        </div>
+      </div>
+      <div class="fi-side">
+        <div class="fi-card fi-quick">
+          <h3>Quick Facts</h3>
+          <ul class="fi-facts" id="fiFacts"></ul>
+        </div>
+        <a id="fiCTA" href="register.html" class="fi-cta-btn">
+          Try This Feature <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/feature-info.js"></script>
+</body>
+</html>

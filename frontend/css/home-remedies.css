@@ -1,0 +1,448 @@
+/* ================================================
+   HOME REMEDIES CSS
+   NutriGuide Pro — home-remedies.css
+   ================================================ */
+
+/* Two panel layout */
+.hr-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+/* ── LEFT PANEL ── */
+.hr-left {
+  position: sticky;
+  top: 20px;
+}
+
+/* Search box */
+.hr-search-box {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.hr-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.hr-search-box input {
+  width: 100%;
+  padding: 11px 14px 11px 40px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  background: white;
+}
+
+.hr-search-box input:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+}
+
+.hr-search-box input::placeholder {
+  color: #d1d5db;
+}
+
+/* Problems grid */
+.hr-problems-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Scrollbar styling */
+.hr-problems-grid::-webkit-scrollbar {
+  width: 4px;
+}
+.hr-problems-grid::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 99px;
+}
+.hr-problems-grid::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 99px;
+}
+
+/* Individual problem card */
+.hr-problem-card {
+  background: white;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hr-problem-card:hover {
+  border-color: #10b981;
+  background: #f0fdf4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16,185,129,0.15);
+}
+
+.hr-problem-card.active {
+  border-color: #10b981;
+  background: #f0fdf4;
+  box-shadow: 0 4px 12px rgba(16,185,129,0.2);
+}
+
+.hr-problem-emoji {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.hr-problem-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.3;
+}
+
+/* No results */
+.hr-no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 24px;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+/* ── RIGHT PANEL ── */
+.hr-right {
+  min-width: 0;
+}
+
+/* Empty state */
+.hr-empty-state {
+  background: white;
+  border-radius: 16px;
+  padding: 60px 32px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.hr-empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.hr-empty-state h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 10px;
+}
+
+.hr-empty-state p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* ── DETAIL PANEL ── */
+.hr-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Detail header card */
+.hr-detail-header {
+  background: linear-gradient(135deg, #064e3b, #065f46);
+  border-radius: 16px;
+  padding: 24px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.hr-detail-emoji {
+  font-size: 52px;
+  flex-shrink: 0;
+}
+
+.hr-detail-header h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 6px;
+  font-family: 'DM Serif Display', serif;
+}
+
+.hr-detail-header p {
+  font-size: 13px;
+  opacity: 0.8;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Section cards */
+.hr-section-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.hr-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Remedy card */
+.hr-remedy-card {
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 0;
+}
+
+.hr-remedy-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #064e3b;
+  margin: 0 0 8px;
+}
+
+.hr-remedy-prep {
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Science section */
+.hr-science-text {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Active compounds badges */
+.hr-compounds-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.hr-compound-badge {
+  background: #ede9fe;
+  color: #5b21b6;
+  border: 1.5px solid #ddd6fe;
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Nutrition benefit */
+.hr-nutrition-text {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Lifestyle tips */
+.hr-tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hr-tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.hr-tip-dot {
+  width: 20px;
+  height: 20px;
+  background: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.hr-tip-dot i {
+  font-size: 9px;
+  color: #15803d;
+}
+
+/* Doctor warning card */
+.hr-warning-card {
+  background: #fff1f2;
+  border: 2px solid #fecdd3;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.hr-warning-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #be123c;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hr-warning-text {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Disclaimer */
+.hr-disclaimer {
+  background: #fefce8;
+  border: 1.5px solid #fde047;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: #713f12;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hr-layout {
+    grid-template-columns: 1fr;
+  }
+  .hr-left {
+    position: static;
+  }
+  .hr-problems-grid {
+    max-height: none;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .hr-problems-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .hr-detail-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+/* ── LOADING STATES ── */
+
+.hr-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #9ca3af;
+}
+
+.hr-loading i {
+  font-size: 28px;
+  color: #10b981;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.hr-loading p {
+  font-size: 13px;
+  margin: 0;
+}
+
+.hr-load-error {
+  text-align: center;
+  padding: 32px 20px;
+  color: #6b7280;
+}
+
+.hr-load-error i {
+  font-size: 28px;
+  color: #f97316;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.hr-load-error p {
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+
+.hr-retry-btn {
+  padding: 8px 18px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hr-retry-btn:hover {
+  background: #059669;
+}
+
+.hr-detail-loading {
+  background: white;
+  border-radius: 16px;
+  padding: 60px 32px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.hr-detail-loading i {
+  font-size: 32px;
+  color: #10b981;
+}

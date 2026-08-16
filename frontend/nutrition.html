@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nutrition Analysis — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/nutrition.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li class="active"><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li><a href="nutrition-decoder.html"><i class="fas fa-tag"></i> Label Decoder</a></li>
+      <li><a href="heatwave.html"><i class="fas fa-temperature-high"></i> Heatwave Alert</a></li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Analysis</p>
+      <h1>Nutrition Analysis</h1>
+      <p>Identify deficiencies and get food recommendations</p>
+    </div>
+    <div class="topbar-right"><div class="avatar" id="userAvatar">U</div></div>
+  </div>
+
+  <div class="nutr-layout">
+    <div class="page-card nutr-form">
+      <h2>Select Your Symptom</h2>
+      <p class="form-hint">Choose a symptom and we'll recommend nutrients and foods to help.</p>
+      <label>Current Symptom</label>
+      <select id="symptom">
+        <option value="">-- Select a symptom --</option>
+        <option value="Fatigue">Fatigue</option>
+        <option value="Hair Fall">Hair Fall</option>
+        <option value="Bone Pain">Bone Pain</option>
+        <option value="Low Immunity">Low Immunity</option>
+        <option value="Muscle Cramps">Muscle Cramps</option>
+        <option value="Poor Vision">Poor Vision</option>
+        <option value="Dry Skin">Dry Skin</option>
+        <option value="Frequent Headache">Frequent Headache</option>
+        <option value="Anxiety & Stress">Anxiety &amp; Stress</option>
+        <option value="Poor Sleep">Poor Sleep</option>
+        <option value="Weak Nails">Weak Nails</option>
+        <option value="Low Energy After Meals">Low Energy After Meals</option>
+        <option value="Bloating">Bloating</option>
+        <option value="Frequent Colds">Frequent Colds</option>
+        <option value="Constipation">Constipation</option>
+        <option value="High Blood Pressure">High Blood Pressure</option>
+        <option value="Acne / Skin Breakouts">Acne / Skin Breakouts</option>
+        <option value="None">No Symptoms</option>
+      </select>
+      <button class="btn-primary" onclick="analyzeNutrition()">
+        <i class="fas fa-magnifying-glass"></i> Analyze
+      </button>
+      <a href="dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+    </div>
+
+    <div class="nutr-result-col">
+      <div class="page-card" id="resultCard" style="display:none">
+        <div class="result-header">
+          <div class="result-icon" id="resultIcon">🔬</div>
+          <div>
+            <p class="section-tag" id="resultSymptom"></p>
+            <h2 id="resultTitle"></h2>
+          </div>
+        </div>
+        <div class="nutrient-box" id="nutrientBox"></div>
+        <h3 style="margin-top:24px;margin-bottom:16px;font-size:1rem">Recommended Foods</h3>
+        <ul class="food-list" id="foodList"></ul>
+      </div>
+
+      <div class="page-card nutr-empty" id="emptyCard">
+        <div style="font-size:3rem;margin-bottom:12px">🥗</div>
+        <h3>Pick a symptom</h3>
+        <p>Select a symptom from the form to get personalised nutrition advice.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/nutrition.js"></script>
+</body>
+</html>

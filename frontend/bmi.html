@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMI Calculator — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/bmi.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li class="active"><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li><a href="nutrition-decoder.html"><i class="fas fa-tag"></i> Label Decoder</a></li>
+      <li><a href="heatwave.html"><i class="fas fa-temperature-high"></i> Heatwave Alert</a></li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Health Tools</p>
+      <h1>BMI Calculator</h1>
+      <p>Calculate using cm or feet — with age & gender accuracy</p>
+    </div>
+    <div class="topbar-right"><div class="avatar" id="userAvatar">U</div></div>
+  </div>
+
+  <div class="bmi-layout">
+    <!-- Input Card -->
+    <div class="page-card">
+      <h2>Your Details</h2>
+
+      <!-- Age & Gender row -->
+      <div class="bmi-two-col">
+        <div>
+          <label>Age</label>
+          <input type="number" id="ageInput" placeholder="e.g. 22" min="1" max="120"/>
+        </div>
+        <div>
+          <label>Gender</label>
+          <select id="genderInput">
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Height unit toggle -->
+      <label>Height</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="btnCm" onclick="switchUnit('cm')">cm</button>
+        <button class="unit-btn" id="btnFt" onclick="switchUnit('ft')">feet & inches</button>
+      </div>
+
+      <!-- CM input -->
+      <div id="cmInput">
+        <input type="number" id="heightCm" placeholder="e.g. 170 cm" min="50" max="250"/>
+      </div>
+
+      <!-- Feet + Inches input -->
+      <div id="ftInput" style="display:none">
+        <div class="bmi-two-col">
+          <div>
+            <input type="number" id="heightFt" placeholder="Feet e.g. 5" min="1" max="8"/>
+          </div>
+          <div>
+            <input type="number" id="heightIn" placeholder="Inches e.g. 9" min="0" max="11"/>
+          </div>
+        </div>
+      </div>
+
+      <label>Weight (kg)</label>
+      <input type="number" id="weightInput" placeholder="e.g. 68" min="10" max="300"/>
+
+      <button class="btn-primary" onclick="calculateBMI()">
+        <i class="fas fa-calculator"></i> Calculate BMI
+      </button>
+      <a href="dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+    </div>
+
+    <!-- Result Card -->
+    <div class="page-card bmi-result-card" id="bmiResultCard">
+      <div class="bmi-ring-wrap">
+        <svg viewBox="0 0 140 140" width="160" height="160">
+          <circle cx="70" cy="70" r="55" fill="none" stroke="#e8f5e9" stroke-width="12"/>
+          <circle cx="70" cy="70" r="55" fill="none" stroke="#3ecf8e" stroke-width="12"
+            stroke-dasharray="345" stroke-dashoffset="345" stroke-linecap="round"
+            transform="rotate(-90 70 70)" id="bmiRing"/>
+        </svg>
+        <div class="bmi-ring-label">
+          <span id="bmiResult">--</span>
+          <small>BMI</small>
+        </div>
+      </div>
+
+      <div class="bmi-category" id="bmiCategory">--</div>
+      <p class="bmi-tip" id="bmiTip">Fill in your details and click Calculate.</p>
+
+      <!-- Ideal weight range -->
+      <div class="ideal-weight-box" id="idealWeightBox" style="display:none">
+        <i class="fas fa-bullseye"></i>
+        <span>Ideal weight range: <strong id="idealWeightText">--</strong></span>
+      </div>
+
+      <div class="bmi-scale">
+        <div class="bmi-scale-bar">
+          <div class="bsi underweight"></div>
+          <div class="bsi normal"></div>
+          <div class="bsi overweight"></div>
+          <div class="bsi obese"></div>
+          <div class="bmi-pointer" id="bmiPointer" style="left:0%"></div>
+        </div>
+        <div class="bmi-scale-labels">
+          <span>Under<br/>&lt;18.5</span>
+          <span>Normal<br/>18.5–24.9</span>
+          <span>Over<br/>25–29.9</span>
+          <span>Obese<br/>≥30</span>
+        </div>
+      </div>
+
+      <div class="bmi-info-row">
+        <div class="bi-box"><span id="resHeight">--</span><p>Height</p></div>
+        <div class="bi-box"><span id="resWeight">--</span><p>Weight (kg)</p></div>
+        <div class="bi-box"><span id="resAge">--</span><p>Age</p></div>
+        <div class="bi-box"><span id="resGender">--</span><p>Gender</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/bmi.js"></script>
+</body>
+</html>

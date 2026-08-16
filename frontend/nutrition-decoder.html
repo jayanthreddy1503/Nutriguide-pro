@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nutrition Label Decoder — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <link rel="stylesheet" href="css/nutrition-decoder.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle">
+  <i class="fas fa-bars"></i>
+</button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li class="active">
+        <a href="nutrition-decoder.html">
+          <i class="fas fa-tag"></i> Label Decoder
+        </a>
+      </li>
+      <li><a href="heatwave.html"><i class="fas fa-temperature-high"></i> Heatwave Alert</a></li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" id="logoutBtn">
+      <i class="fas fa-right-from-bracket"></i> Logout
+    </a>
+  </div>
+</aside>
+
+<main class="main-content">
+
+  <!-- PAGE HEADER -->
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Smart Tools</p>
+      <h1 style="font-family:'DM Serif Display',serif;">
+        🏷️ Nutrition Label Decoder
+      </h1>
+      <p style="color:#6b7280;margin-top:4px;">
+        Enter values from any packaged food label to understand
+        what you are eating. Results are saved to your history.
+      </p>
+    </div>
+    <div class="topbar-right">
+      <div class="avatar" id="userAvatar">U</div>
+    </div>
+  </div>
+
+  <!-- TWO PANEL LAYOUT -->
+  <div class="decoder-layout">
+
+    <!-- ═══════════════════════════════
+         LEFT PANEL — INPUT FORM
+    ════════════════════════════════ -->
+    <div class="decoder-left">
+      <div class="decoder-card">
+
+        <h3 class="decoder-card-title">Enter Nutrition Label Values</h3>
+        <p class="decoder-card-sub">
+          Per serving values from the back of your food package.
+        </p>
+
+        <!-- Food Name -->
+        <div class="nd-food-name-group">
+          <label>
+            <i class="fas fa-utensils" style="color:#10b981"></i>
+            Food / Product Name (optional)
+          </label>
+          <input
+            type="text"
+            id="foodNameInput"
+            placeholder="e.g. Maggi Noodles, Marie Biscuit, Parle-G"
+          />
+        </div>
+
+        <!-- 12 Nutrient Inputs -->
+        <div class="nd-input-grid">
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-fire" style="color:#ef4444"></i>
+              Calories (kcal)
+            </label>
+            <input type="number" id="inp-calories"
+              placeholder="e.g. 250" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-drumstick-bite" style="color:#f97316"></i>
+              Protein (g)
+            </label>
+            <input type="number" id="inp-protein"
+              placeholder="e.g. 8" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-droplet" style="color:#facc15"></i>
+              Total Fat (g)
+            </label>
+            <input type="number" id="inp-fat"
+              placeholder="e.g. 10" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-wheat-awn" style="color:#a16207"></i>
+              Carbohydrates (g)
+            </label>
+            <input type="number" id="inp-carbs"
+              placeholder="e.g. 30" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-candy-cane" style="color:#ec4899"></i>
+              Sugar (g)
+            </label>
+            <input type="number" id="inp-sugar"
+              placeholder="e.g. 12" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-plus" style="color:#8b5cf6"></i>
+              Added Sugar (g)
+            </label>
+            <input type="number" id="inp-added-sugar"
+              placeholder="e.g. 8" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-seedling" style="color:#10b981"></i>
+              Dietary Fiber (g)
+            </label>
+            <input type="number" id="inp-fiber"
+              placeholder="e.g. 3" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-shaker" style="color:#64748b"></i>
+              Sodium (mg)
+            </label>
+            <input type="number" id="inp-sodium"
+              placeholder="e.g. 400" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-bone" style="color:#0ea5e9"></i>
+              Calcium (mg)
+            </label>
+            <input type="number" id="inp-calcium"
+              placeholder="e.g. 120" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-circle" style="color:#dc2626"></i>
+              Iron (mg)
+            </label>
+            <input type="number" id="inp-iron"
+              placeholder="e.g. 2" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-heart" style="color:#f43f5e"></i>
+              Potassium (mg)
+            </label>
+            <input type="number" id="inp-potassium"
+              placeholder="e.g. 200" min="0"/>
+          </div>
+
+          <div class="nd-input-group">
+            <label>
+              <i class="fas fa-lemon" style="color:#eab308"></i>
+              Vitamin C (mg)
+            </label>
+            <input type="number" id="inp-vitc"
+              placeholder="e.g. 15" min="0"/>
+          </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <button class="nd-decode-btn" id="decodeBtn">
+          <i class="fas fa-magnifying-glass"></i> Decode Label
+        </button>
+
+        <button class="nd-clear-btn" id="clearBtn">
+          <i class="fas fa-rotate-left"></i> Clear All Fields
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         RIGHT PANEL — RESULTS
+    ════════════════════════════════ -->
+    <div class="decoder-right">
+
+      <!-- Empty state — shown before decode -->
+      <div class="nd-empty-state" id="emptyState">
+        <div class="nd-empty-icon">🏷️</div>
+        <h3>Your Label Analysis</h3>
+        <p>
+          Fill in the nutrition values on the left and click
+          <strong>Decode Label</strong> to see a complete
+          breakdown of what each nutrient means for your body.
+        </p>
+      </div>
+
+      <!-- Results — shown after decode -->
+      <div id="resultsContainer" style="display:none;">
+
+        <!-- Results header -->
+        <div class="nd-results-header">
+          <h3>
+            <i class="fas fa-chart-bar"></i>
+            Label Analysis Results
+          </h3>
+          <p id="resultsTimestamp"></p>
+        </div>
+
+        <!-- Overall score card -->
+        <div id="overallCard"></div>
+
+        <!-- Individual nutrient cards -->
+        <div id="nutrientCards"></div>
+
+        <!-- Healthier alternatives -->
+        <div id="altSection"></div>
+
+        <!-- Disclaimer -->
+        <div class="nd-disclaimer">
+          <i class="fas fa-triangle-exclamation"></i>
+          <strong> Disclaimer:</strong> This analysis is intended
+          for nutrition awareness and educational purposes only.
+          Consult a registered dietitian for personalised dietary
+          advice.
+        </div>
+
+      </div>
+
+      <!-- Scan History — loaded from MongoDB -->
+      <div class="nd-history-section" id="historySection"
+           style="display:none;">
+        <div class="nd-history-header">
+          <h4>
+            <i class="fas fa-clock-rotate-left"></i>
+            Recent Scans
+          </h4>
+          <span class="nd-history-sub">Last 10 decoded labels</span>
+        </div>
+        <div id="historyList"></div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/nutrition-decoder.js"></script>
+</body>
+</html>

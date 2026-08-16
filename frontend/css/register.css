@@ -1,0 +1,95 @@
+.alert.success {
+  background: #e8f5e9;
+  color: #2d9e6b;
+}
+
+/* ============ Social login buttons ============ */
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: .92rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, transform .15s;
+}
+.social-btn:hover { border-color: var(--green); background: var(--green-light); transform: translateY(-1px); }
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--muted);
+  font-size: .8rem;
+  margin: 4px 0 20px;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border);
+}
+.divider span { padding: 0 12px; white-space: nowrap; }
+
+/* ============ OTP verification screen ============ */
+.otp-inputs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 22px 0 26px;
+}
+.otp-box {
+  width: 46px;
+  height: 54px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color .2s;
+}
+.otp-box:focus { border-color: var(--green); background: #fff; }
+
+.otp-resend-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--green-dark);
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: .9rem;
+  cursor: pointer;
+  padding: 0;
+}
+.link-btn:hover { text-decoration: underline; }
+.link-btn.back-to-form {
+  display: block;
+  margin: 18px auto 0;
+  text-align: center;
+  width: 100%;
+  color: var(--muted);
+  font-weight: 600;
+}

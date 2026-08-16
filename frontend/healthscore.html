@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health Score — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/healthscore.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li class="active"><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li><a href="nutrition-decoder.html"><i class="fas fa-tag"></i> Label Decoder</a></li>
+      <li><a href="heatwave.html"><i class="fas fa-temperature-high"></i> Heatwave Alert</a></li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Analysis</p>
+      <h1>Health Score</h1>
+      <p>Your overall wellness rating</p>
+    </div>
+    <div class="topbar-right"><div class="avatar" id="userAvatar">U</div></div>
+  </div>
+
+  <div class="hs-layout">
+    <div class="page-card hs-main">
+      <div class="hs-circle-wrap">
+        <svg viewBox="0 0 200 200" width="200" height="200">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#e8f5e9" stroke-width="16"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#3ecf8e" stroke-width="16"
+            stroke-dasharray="502" stroke-dashoffset="502" stroke-linecap="round"
+            transform="rotate(-90 100 100)" id="hsRing"/>
+        </svg>
+        <div class="hs-center">
+          <span id="hsScore">--</span>
+          <small>/ 100</small>
+          <p id="hsLabel">Calculating...</p>
+        </div>
+      </div>
+
+      <div class="hs-breakdown">
+        <div class="hs-item">
+          <div class="hs-item-left">
+            <i class="fas fa-weight-scale" style="color:#2d9e6b"></i>
+            <span>BMI Status</span>
+          </div>
+          <div class="hs-item-right">
+            <div class="hs-mini-bar"><div id="bmiFill" class="hmb-fill green"></div></div>
+            <span id="bmiStatus" class="hs-badge">--</span>
+          </div>
+        </div>
+        <div class="hs-item">
+          <div class="hs-item-left">
+            <i class="fas fa-droplet" style="color:#1976d2"></i>
+            <span>Water Intake</span>
+          </div>
+          <div class="hs-item-right">
+            <div class="hs-mini-bar"><div id="waterFill" class="hmb-fill blue"></div></div>
+            <span id="waterStatus" class="hs-badge">--</span>
+          </div>
+        </div>
+        <div class="hs-item">
+          <div class="hs-item-left">
+            <i class="fas fa-bullseye" style="color:#e67e22"></i>
+            <span>Goal Set</span>
+          </div>
+          <div class="hs-item-right">
+            <div class="hs-mini-bar"><div id="goalFill" class="hmb-fill orange"></div></div>
+            <span id="goalStatus" class="hs-badge">--</span>
+          </div>
+        </div>
+        <div class="hs-item">
+          <div class="hs-item-left">
+            <i class="fas fa-apple-whole" style="color:#c2185b"></i>
+            <span>Nutrition</span>
+          </div>
+          <div class="hs-item-right">
+            <div class="hs-mini-bar"><div id="nutritionFill" class="hmb-fill pink"></div></div>
+            <span id="nutritionStatus" class="hs-badge">--</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+    </div>
+
+    <div class="hs-side">
+      <div class="page-card">
+        <h2>Score Breakdown</h2>
+        <p class="hs-explain">Your score is calculated based on BMI range, daily hydration, goal setting, and nutrition tracking activity.</p>
+        <div class="score-tip" id="scoreTip">Complete your profile to improve accuracy.</div>
+      </div>
+      <div class="page-card">
+        <h2>Quick Actions</h2>
+        <div class="quick-actions">
+          <a href="bmi.html" class="qa-btn"><i class="fas fa-weight-scale"></i> Check BMI</a>
+          <a href="water.html" class="qa-btn"><i class="fas fa-droplet"></i> Log Water</a>
+          <a href="profile.html" class="qa-btn"><i class="fas fa-user"></i> Update Profile</a>
+          <a href="nutrition.html" class="qa-btn"><i class="fas fa-apple-whole"></i> Nutrition</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/healthscore.js"></script>
+</body>
+</html>

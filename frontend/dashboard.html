@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li class="active"><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li><a href="nutrition-decoder.html"><i class="fas fa-tag"></i> Label Decoder</a></li>
+      <li><a href="heatwave.html"><i class="fas fa-temperature-high"></i> Heatwave Alert</a></li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Overview</p>
+      <h1 id="welcomeText">Welcome back 👋</h1>
+      <p id="welcomeSub">Here's your health summary for today.</p>
+    </div>
+    <div class="topbar-right">
+      <div class="avatar" id="userAvatar">U</div>
+    </div>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-grid">
+    <div class="stat-card green">
+      <div class="sc-icon"><i class="fas fa-heart-pulse"></i></div>
+      <div class="sc-body">
+        <p class="sc-label">Health Score</p>
+        <h2 class="sc-value" id="dashHealthScore">--</h2>
+      </div>
+    </div>
+    <div class="stat-card blue">
+      <div class="sc-icon"><i class="fas fa-weight-scale"></i></div>
+      <div class="sc-body">
+        <p class="sc-label">BMI</p>
+        <h2 class="sc-value" id="dashBmi">--</h2>
+      </div>
+    </div>
+    <div class="stat-card orange">
+      <div class="sc-icon"><i class="fas fa-droplet"></i></div>
+      <div class="sc-body">
+        <p class="sc-label">Water Today</p>
+        <h2 class="sc-value" id="dashWater">-- ml</h2>
+      </div>
+    </div>
+    <div class="stat-card purple">
+      <div class="sc-icon"><i class="fas fa-bullseye"></i></div>
+      <div class="sc-body">
+        <p class="sc-label">Current Goal</p>
+        <h2 class="sc-value" id="dashGoal">--</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================
+       EXISTING HEALTH FEATURES SECTION
+       (unchanged — exactly as before)
+  ================================= -->
+  <div class="section-tag" style="margin-bottom:10px">Modules</div>
+  <h2 style="font-family:'DM Serif Display',serif;margin-bottom:20px;font-size:1.3rem">Health Features</h2>
+  <div class="feature-grid">
+    <a href="bmi.html" class="feat-module">
+      <div class="fm-icon" style="background:#e8f5e9;color:#2d9e6b"><i class="fas fa-weight-scale"></i></div>
+      <div>
+        <h3>BMI Calculator</h3>
+        <p>Check BMI and weight status</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+    <a href="water.html" class="feat-module">
+      <div class="fm-icon" style="background:#e3f2fd;color:#1976d2"><i class="fas fa-droplet"></i></div>
+      <div>
+        <h3>Water Tracker</h3>
+        <p>Track daily hydration</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+    <a href="nutrition.html" class="feat-module">
+      <div class="fm-icon" style="background:#fce4ec;color:#c2185b"><i class="fas fa-apple-whole"></i></div>
+      <div>
+        <h3>Nutrition Analysis</h3>
+        <p>Fix nutritional deficiencies</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+    <a href="recommendation.html" class="feat-module">
+      <div class="fm-icon" style="background:#fff3e0;color:#e67e22"><i class="fas fa-lightbulb"></i></div>
+      <div>
+        <h3>Recommendations</h3>
+        <p>7-day diet plan by gender & goal</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+    <a href="healthscore.html" class="feat-module">
+      <div class="fm-icon" style="background:#e0f7fa;color:#00838f"><i class="fas fa-chart-line"></i></div>
+      <div>
+        <h3>Health Score</h3>
+        <p>Your overall health rating</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+    <a href="progess.html" class="feat-module">
+      <div class="fm-icon" style="background:#f3e5f5;color:#7b1fa2"><i class="fas fa-chart-pie"></i></div>
+      <div>
+        <h3>Progress Tracker</h3>
+        <p>Track your weight journey</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+    <a href="recipes.html" class="feat-module">
+      <div class="fm-icon" style="background:#fff8e1;color:#f57f17"><i class="fas fa-bowl-food"></i></div>
+      <div>
+        <h3>Healthy Recipes</h3>
+        <p>Nutritious meal ideas</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+    <a href="exercises.html" class="feat-module">
+      <div class="fm-icon" style="background:#e8eaf6;color:#3949ab"><i class="fas fa-dumbbell"></i></div>
+      <div>
+        <h3>Exercise Library</h3>
+        <p>Workouts by body part</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+    <a href="calorie-calc.html" class="feat-module">
+      <div class="fm-icon" style="background:#fbe9e7;color:#bf360c"><i class="fas fa-fire"></i></div>
+      <div>
+        <h3>Calorie Calculator</h3>
+        <p>Track food calories</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+  </div>
+
+  <!-- ================================
+       NEW: SMART TOOLS SECTION
+       3 new cards added below
+       existing 9 cards — same style
+  ================================= -->
+  <div class="section-tag" style="margin:32px 0 10px">Smart Tools</div>
+  <h2 style="font-family:'DM Serif Display',serif;margin-bottom:20px;font-size:1.3rem">AI & Climate Features</h2>
+  <div class="feature-grid">
+
+    <a href="nutrition-decoder.html" class="feat-module">
+      <div class="fm-icon" style="background:#e8f5e9;color:#2d9e6b">
+        <i class="fas fa-tag"></i>
+      </div>
+      <div>
+        <h3>Smart Nutrition Label Decoder</h3>
+        <p>Understand packaged food labels with easy explanations.</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+
+    <a href="heatwave.html" class="feat-module">
+      <div class="fm-icon" style="background:#fff3e0;color:#e65100">
+        <i class="fas fa-temperature-high"></i>
+      </div>
+      <div>
+        <h3>Heatwave & Climate Health Alert</h3>
+        <p>Real-time weather alerts with hydration and cooling food tips.</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+
+    <a href="home-remedies.html" class="feat-module">
+      <div class="fm-icon" style="background:#f1f8e9;color:#558b2f">
+        <i class="fas fa-leaf"></i>
+      </div>
+      <div>
+        <h3>Home Remedy + Science Explorer</h3>
+        <p>Traditional Indian remedies with scientific explanations.</p>
+      </div>
+      <i class="fas fa-arrow-right fm-arrow"></i>
+    </a>
+
+  </div>
+
+  <!-- ================================
+       EXISTING EXERCISE SECTION
+       (unchanged — exactly as before)
+  ================================= -->
+  <div class="section-tag" style="margin:32px 0 10px">Exercise Plan</div>
+  <h2 style="font-family:'DM Serif Display',serif;margin-bottom:20px;font-size:1.3rem">Exercises for Your Goal</h2>
+  <div id="dashExerciseSection">
+    <div class="dash-ex-banner">
+      <i class="fas fa-dumbbell"></i>
+      <p>Set your goal in <a href="profile.html">Profile</a> to see personalised exercises.</p>
+    </div>
+  </div>
+
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

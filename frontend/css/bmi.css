@@ -1,0 +1,87 @@
+.bmi-layout {
+  display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start;
+}
+.bmi-result-card { text-align: center; }
+
+/* Two-col inside form */
+.bmi-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Unit toggle */
+.unit-toggle {
+  display: flex; gap: 8px; margin-bottom: 12px;
+}
+.unit-btn {
+  flex: 1; padding: 9px; border-radius: 10px;
+  border: 1.5px solid var(--border); background: var(--bg);
+  font-family: var(--font); font-size: .85rem; font-weight: 700;
+  cursor: pointer; color: var(--muted); transition: all .2s;
+}
+.unit-btn.active {
+  background: var(--green); color: #fff; border-color: var(--green);
+}
+
+/* Ideal weight box */
+.ideal-weight-box {
+  display: flex; align-items: center; gap: 10px;
+  background: #e8f5e9; border-radius: 12px;
+  padding: 12px 16px; margin-bottom: 20px;
+  font-size: .88rem; color: var(--green-dark); font-weight: 600;
+}
+.ideal-weight-box i { font-size: 1rem; }
+
+.bmi-ring-wrap {
+  position: relative; display: inline-flex;
+  align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.bmi-ring-label {
+  position: absolute; display: flex; flex-direction: column; align-items: center;
+}
+.bmi-ring-label span { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--text); }
+.bmi-ring-label small { font-size: .75rem; color: var(--muted); font-weight: 600; }
+
+.bmi-category {
+  font-size: 1.3rem; font-weight: 800; margin-bottom: 8px;
+}
+.cat-underweight { color: #1976d2; }
+.cat-normal { color: #2d9e6b; }
+.cat-overweight { color: #e67e22; }
+.cat-obese { color: #c62828; }
+
+.bmi-tip { font-size: .88rem; color: var(--muted); margin-bottom: 24px; }
+
+.bmi-scale { margin: 0 auto 24px; max-width: 320px; }
+.bmi-scale-bar {
+  height: 10px; border-radius: 99px; display: flex;
+  position: relative; overflow: visible; margin-bottom: 6px;
+}
+.bsi { flex: 1; height: 100%; }
+.bsi.underweight { background: #90caf9; border-radius: 99px 0 0 99px; }
+.bsi.normal { background: #a5d6a7; }
+.bsi.overweight { background: #ffcc80; }
+.bsi.obese { background: #ef9a9a; border-radius: 0 99px 99px 0; }
+.bmi-pointer {
+  position: absolute; top: -4px; width: 18px; height: 18px;
+  background: var(--text); border-radius: 50%; border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  transform: translateX(-50%);
+  transition: left .6s cubic-bezier(.4,0,.2,1);
+}
+.bmi-scale-labels {
+  display: flex; justify-content: space-between;
+  font-size: .7rem; color: var(--muted); font-weight: 600;
+}
+
+.bmi-info-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; justify-content: center;
+}
+.bi-box {
+  background: var(--green-light); border-radius: 14px;
+  padding: 14px 24px; text-align: center;
+}
+.bi-box span { font-size: 1.4rem; font-weight: 800; color: var(--green-dark); display: block; }
+.bi-box p { font-size: .75rem; color: var(--muted); margin-top: 2px; font-weight: 600; }
+
+@media (max-width: 800px) {
+  .bmi-layout { grid-template-columns: 1fr; }
+}

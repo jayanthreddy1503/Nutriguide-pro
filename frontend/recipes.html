@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Healthy Recipes — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/recipes.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li class="active"><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li><a href="nutrition-decoder.html"><i class="fas fa-tag"></i> Label Decoder</a></li>
+      <li><a href="heatwave.html"><i class="fas fa-temperature-high"></i> Heatwave Alert</a></li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Healthy Eating</p>
+      <h1>Healthy Recipes 🍳</h1>
+      <p>Click a food to explore nutritious recipes</p>
+    </div>
+    <div class="topbar-right"><div class="avatar" id="userAvatar">U</div></div>
+  </div>
+
+  <!-- Food Selector Grid -->
+  <div id="foodGrid" class="food-selector-grid">
+    <div class="food-card" onclick="showRecipes('egg')">
+      <div class="food-emoji">🥚</div>
+      <span>Eggs</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('carrot')">
+      <div class="food-emoji">🥕</div>
+      <span>Carrot</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('banana')">
+      <div class="food-emoji">🍌</div>
+      <span>Banana</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('chicken')">
+      <div class="food-emoji">🍗</div>
+      <span>Chicken</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('spinach')">
+      <div class="food-emoji">🥬</div>
+      <span>Spinach</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('oats')">
+      <div class="food-emoji">🌾</div>
+      <span>Oats</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('salmon')">
+      <div class="food-emoji">🐟</div>
+      <span>Salmon</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('avocado')">
+      <div class="food-emoji">🥑</div>
+      <span>Avocado</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('tomato')">
+      <div class="food-emoji">🍅</div>
+      <span>Tomato</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('lentil')">
+      <div class="food-emoji">🫘</div>
+      <span>Lentils</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('milk')">
+      <div class="food-emoji">🥛</div>
+      <span>Milk</span>
+    </div>
+    <div class="food-card" onclick="showRecipes('apple')">
+      <div class="food-emoji">🍎</div>
+      <span>Apple</span>
+    </div>
+  </div>
+
+  <!-- Recipe Detail Panel (hidden initially) -->
+  <div id="recipePanel" class="recipe-panel hidden">
+    <div class="recipe-panel-header">
+      <button class="back-food-btn" onclick="backToGrid()">
+        <i class="fas fa-arrow-left"></i> All Foods
+      </button>
+      <div class="rph-title">
+        <span id="panelEmoji" class="rph-emoji">🥚</span>
+        <div>
+          <p class="section-tag" id="panelTag">Recipes</p>
+          <h2 id="panelTitle">Egg Recipes</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipes-list" id="recipesList"></div>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/recipes.js"></script>
+</body>
+</html>

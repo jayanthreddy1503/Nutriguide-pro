@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calorie Calculator — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/calorie-calc.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+<div class="sidebar-overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li class="active"><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li><a href="nutrition-decoder.html"><i class="fas fa-tag"></i> Label Decoder</a></li>
+      <li><a href="heatwave.html"><i class="fas fa-temperature-high"></i> Heatwave Alert</a></li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Nutrition Tool</p>
+      <h1>Calorie Calculator 🔥</h1>
+      <p>Enter food name and weight to get exact calories</p>
+    </div>
+    <div class="topbar-right"><div class="avatar" id="userAvatar">U</div></div>
+  </div>
+
+  <div class="calc-layout">
+
+    <!-- Input Card -->
+    <div class="page-card calc-input-card">
+      <h2>Add Food Item</h2>
+
+      <div class="ai-identify-box">
+        <label><i class="fas fa-wand-magic-sparkles"></i> AI Food Identifier</label>
+        <p class="ai-hint">Describe what you ate in plain words — e.g. "2 boiled eggs and a bowl of rice" — and AI will identify the items and estimate calories for you.</p>
+        <textarea id="aiDescription" rows="2" placeholder="e.g. 2 boiled eggs, 150g grilled chicken and a banana"></textarea>
+        <button class="btn-primary" id="aiIdentifyBtn" onclick="identifyFoodWithAI()">
+          <i class="fas fa-wand-magic-sparkles"></i> Identify & Add
+        </button>
+        <div id="aiMsg" class="ai-msg hidden"></div>
+      </div>
+
+      <div class="manual-divider"><span>or add manually</span></div>
+
+      <label>Food Name</label>
+      <select id="foodName">
+        <option value="">-- Select a food --</option>
+        <optgroup label="Proteins">
+          <option value="egg">Egg (whole)</option>
+          <option value="chicken_breast">Chicken Breast</option>
+          <option value="salmon">Salmon</option>
+          <option value="tuna">Tuna</option>
+          <option value="paneer">Paneer</option>
+          <option value="tofu">Tofu</option>
+        </optgroup>
+        <optgroup label="Grains & Carbs">
+          <option value="white_rice">White Rice (cooked)</option>
+          <option value="brown_rice">Brown Rice (cooked)</option>
+          <option value="oats">Oats (dry)</option>
+          <option value="bread_white">White Bread (1 slice)</option>
+          <option value="bread_wheat">Whole Wheat Bread</option>
+          <option value="pasta">Pasta (cooked)</option>
+          <option value="roti">Roti / Chapati</option>
+        </optgroup>
+        <optgroup label="Fruits">
+          <option value="banana">Banana</option>
+          <option value="apple">Apple</option>
+          <option value="mango">Mango</option>
+          <option value="orange">Orange</option>
+          <option value="grapes">Grapes</option>
+        </optgroup>
+        <optgroup label="Vegetables">
+          <option value="carrot">Carrot</option>
+          <option value="spinach">Spinach</option>
+          <option value="broccoli">Broccoli</option>
+          <option value="potato">Potato (boiled)</option>
+          <option value="tomato">Tomato</option>
+          <option value="onion">Onion</option>
+        </optgroup>
+        <optgroup label="Dairy">
+          <option value="milk">Milk (whole)</option>
+          <option value="curd">Curd / Yogurt</option>
+          <option value="cheese">Cheese</option>
+          <option value="butter">Butter</option>
+        </optgroup>
+        <optgroup label="Fats & Nuts">
+          <option value="almonds">Almonds</option>
+          <option value="peanuts">Peanuts</option>
+          <option value="avocado">Avocado</option>
+          <option value="olive_oil">Olive Oil</option>
+          <option value="coconut_oil">Coconut Oil</option>
+        </optgroup>
+        <optgroup label="Legumes">
+          <option value="lentils">Lentils (cooked)</option>
+          <option value="chickpeas">Chickpeas (cooked)</option>
+          <option value="kidney_beans">Kidney Beans</option>
+        </optgroup>
+      </select>
+
+      <label>Weight (grams)</label>
+      <input type="number" id="foodWeight" placeholder="e.g. 100" min="1" max="2000"/>
+
+      <button class="btn-primary" onclick="addFoodItem()">
+        <i class="fas fa-plus"></i> Add to List
+      </button>
+
+      <div class="daily-goal-row">
+        <label>Daily Calorie Goal</label>
+        <input type="number" id="dailyGoal" placeholder="e.g. 2000" min="500" max="5000"/>
+      </div>
+
+      <a href="dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+    </div>
+
+    <!-- Results -->
+    <div class="calc-results-col">
+
+      <!-- Totals card -->
+      <div class="page-card totals-card">
+        <div class="totals-row">
+          <div class="total-box main-cal">
+            <i class="fas fa-fire-flame-curved"></i>
+            <div>
+              <p>Total Calories</p>
+              <h2 id="totalCal">0</h2>
+              <small>kcal</small>
+            </div>
+          </div>
+          <div class="total-box">
+            <i class="fas fa-drumstick-bite" style="color:#e67e22"></i>
+            <div>
+              <p>Protein</p>
+              <h3 id="totalProtein">0g</h3>
+            </div>
+          </div>
+          <div class="total-box">
+            <i class="fas fa-bread-slice" style="color:#f39c12"></i>
+            <div>
+              <p>Carbs</p>
+              <h3 id="totalCarbs">0g</h3>
+            </div>
+          </div>
+          <div class="total-box">
+            <i class="fas fa-droplet" style="color:#3498db"></i>
+            <div>
+              <p>Fat</p>
+              <h3 id="totalFat">0g</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress bar vs goal -->
+        <div class="goal-progress-wrap" id="goalProgressWrap" style="display:none">
+          <div class="goal-progress-labels">
+            <span id="goalProgressText">0 / 0 kcal</span>
+            <span id="goalProgressPct">0%</span>
+          </div>
+          <div class="goal-bar-track">
+            <div class="goal-bar-fill" id="goalBarFill"></div>
+          </div>
+          <p class="goal-status" id="goalStatus"></p>
+        </div>
+      </div>
+
+      <!-- Food items list -->
+      <div class="page-card">
+        <div class="food-list-header">
+          <h2>Food Log</h2>
+          <button class="clear-btn" onclick="clearAll()"><i class="fas fa-trash"></i> Clear All</button>
+        </div>
+        <div id="emptyLog" class="empty-log">
+          <i class="fas fa-utensils"></i>
+          <p>No foods added yet.<br/>Select a food and weight above.</p>
+        </div>
+        <table class="food-table" id="foodTable" style="display:none">
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Weight</th>
+              <th>Calories</th>
+              <th>Protein</th>
+              <th>Carbs</th>
+              <th>Fat</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="foodTableBody"></tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/calorie-calc.js"></script>
+</body>
+</html>

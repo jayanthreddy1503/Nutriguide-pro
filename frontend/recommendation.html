@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recommendations — NutriGuide Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/recommendation.css"/>
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">🥬 Nutri<span>Guide</span></div>
+  <nav>
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-house"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="healthscore.html"><i class="fas fa-chart-line"></i> Health Score</a></li>
+      <li class="active"><a href="recommendation.html"><i class="fas fa-lightbulb"></i> Recommendations</a></li>
+      <li><a href="progess.html"><i class="fas fa-chart-pie"></i> Progress Tracker</a></li>
+      <li><a href="water.html"><i class="fas fa-droplet"></i> Water Tracker</a></li>
+      <li><a href="nutrition.html"><i class="fas fa-apple-whole"></i> Nutrition</a></li>
+      <li><a href="bmi.html"><i class="fas fa-weight-scale"></i> BMI Calculator</a></li>
+      <li><a href="recipes.html"><i class="fas fa-bowl-food"></i> Recipes</a></li>
+      <li><a href="exercises.html"><i class="fas fa-dumbbell"></i> Exercises</a></li>
+      <li><a href="calorie-calc.html"><i class="fas fa-fire"></i> Calorie Calc</a></li>
+      <li><a href="nutrition-decoder.html"><i class="fas fa-tag"></i> Label Decoder</a></li>
+      <li><a href="heatwave.html"><i class="fas fa-temperature-high"></i> Heatwave Alert</a></li>
+      <li><a href="home-remedies.html"><i class="fas fa-leaf"></i> Home Remedies</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="#" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="topbar">
+    <div>
+      <p class="section-tag">Personalized</p>
+      <h1>Recommendations</h1>
+      <p>Based on your profile and goals</p>
+    </div>
+    <div class="topbar-right"><div class="avatar" id="userAvatar">U</div></div>
+  </div>
+
+  <div class="rec-goal-banner" id="goalBanner">
+    <div class="rgb-icon">🎯</div>
+    <div>
+      <p class="section-tag">Your Goal</p>
+      <h2 id="goalTitle">Loading...</h2>
+    </div>
+  </div>
+
+  <div class="rec-grid">
+    <div class="page-card">
+      <div class="rec-icon" style="background:#fff3e0;color:#e67e22"><i class="fas fa-fire"></i></div>
+      <h3>Daily Calories</h3>
+      <p class="rec-value" id="calories">--</p>
+      <p class="rec-note" id="caloriesNote"></p>
+    </div>
+    <div class="page-card">
+      <div class="rec-icon" style="background:#e3f2fd;color:#1976d2"><i class="fas fa-droplet"></i></div>
+      <h3>Water Intake</h3>
+      <p class="rec-value" id="water">--</p>
+      <p class="rec-note">Spread evenly throughout the day</p>
+    </div>
+    <div class="page-card">
+      <div class="rec-icon" style="background:#f3e5f5;color:#7b1fa2"><i class="fas fa-dumbbell"></i></div>
+      <h3>Exercise</h3>
+      <p class="rec-value" id="exercise">--</p>
+      <p class="rec-note" id="exerciseNote"></p>
+    </div>
+  </div>
+
+  <div class="page-card weekly-plan-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="rec-icon" style="background:#e8f5e9;color:#2d9e6b"><i class="fas fa-calendar-week"></i></div>
+        <div>
+          <h2 style="margin:0">7-Day Diet Plan</h2>
+          <p class="rec-note" id="planSubtitle">Personalized by gender and goal</p>
+        </div>
+      </div>
+      <p class="rec-note" id="avoidNote" style="max-width:320px;text-align:right"></p>
+    </div>
+
+    <div class="day-tabs" id="dayTabs"></div>
+    <div class="meal-grid" id="mealGrid"></div>
+  </div>
+
+  <a href="dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+</main>
+
+<script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/recommendation.js"></script>
+</body>
+</html>

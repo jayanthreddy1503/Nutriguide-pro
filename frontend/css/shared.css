@@ -1,0 +1,193 @@
+/* === SHARED LAYOUT (sidebar pages) === */
+:root {
+  --green: #3ecf8e;
+  --green-dark: #2d9e6b;
+  --green-light: #e8f5e9;
+  --bg: #fdf8f2;
+  --surface: #fffdf9;
+  --text: #1a2e1a;
+  --muted: #6b7b6b;
+  --border: #e0ebe3;
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(30,80,40,0.08);
+  --sidebar-w: 240px;
+  --font: 'Plus Jakarta Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: var(--sidebar-w);
+  background: linear-gradient(160deg, #1a3a1a 0%, #254d27 100%);
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  position: fixed; top: 0; left: 0;
+  z-index: 50; overflow-y: auto;
+  transition: transform .3s;
+}
+.sidebar-logo {
+  padding: 28px 24px 20px;
+  font-size: 1.1rem; font-weight: 800; color: #fff;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.sidebar-logo span { color: var(--green); }
+.sidebar nav { flex: 1; padding: 12px 0; }
+.sidebar nav ul { list-style: none; }
+.sidebar nav ul li { margin: 2px 10px; }
+.sidebar nav ul li a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 16px; border-radius: 12px;
+  text-decoration: none; color: #a8c5b0;
+  font-size: .9rem; font-weight: 600;
+  transition: background .2s, color .2s;
+}
+.sidebar nav ul li a i { width: 18px; text-align: center; font-size: .95rem; }
+.sidebar nav ul li a:hover { background: rgba(255,255,255,.08); color: #fff; }
+.sidebar nav ul li.active a,
+.sidebar nav ul li a.active {
+  background: var(--green); color: #fff;
+}
+.sidebar-bottom {
+  padding: 16px 10px 24px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.sidebar-bottom a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 16px; border-radius: 12px;
+  text-decoration: none; color: #e88; font-size: .9rem; font-weight: 600;
+  transition: background .2s;
+}
+.sidebar-bottom a:hover { background: rgba(255,60,60,.12); }
+
+/* MAIN CONTENT */
+.main-content {
+  margin-left: var(--sidebar-w);
+  flex: 1; padding: 32px 36px;
+  min-height: 100vh;
+}
+
+/* TOP BAR */
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 28px;
+}
+.topbar h1 { font-family: 'DM Serif Display', serif; font-size: 1.7rem; }
+.topbar p { color: var(--muted); font-size: .9rem; margin-top: 2px; }
+.topbar-right {
+  display: flex; align-items: center; gap: 12px;
+}
+.avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 800;
+}
+
+/* PAGE CARD */
+.page-card {
+  background: var(--surface); border-radius: 20px;
+  border: 1px solid var(--border);
+  padding: 32px; margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+.page-card h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem; margin-bottom: 20px;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 20px; padding: 10px 22px;
+  border-radius: 10px; background: var(--green-light);
+  color: var(--green-dark); font-weight: 700; font-size: .9rem;
+  text-decoration: none; transition: background .2s;
+}
+.back-btn:hover { background: #c8e6c9; }
+
+/* FORM ELEMENTS */
+label {
+  display: block; font-size: .8rem; font-weight: 700;
+  color: var(--muted); text-transform: uppercase;
+  letter-spacing: .05em; margin-bottom: 6px;
+}
+input[type="text"], input[type="number"], input[type="email"],
+input[type="password"], select {
+  width: 100%; padding: 12px 16px; border-radius: 12px;
+  border: 1.5px solid var(--border); font-family: var(--font);
+  font-size: .95rem; color: var(--text); background: var(--bg);
+  outline: none; transition: border-color .2s; margin-bottom: 16px;
+}
+input:focus, select:focus { border-color: var(--green); background: #fff; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; border-radius: 12px; border: none;
+  background: var(--green); color: #fff;
+  font-family: var(--font); font-size: .95rem; font-weight: 700;
+  cursor: pointer; transition: background .2s, transform .15s;
+}
+.btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+.section-tag {
+  font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--green-dark); margin-bottom: 4px;
+}
+
+/* HAMBURGER for mobile */
+.sidebar-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  background: var(--green); color: #fff; border: none;
+  width: 42px; height: 42px; border-radius: 10px; font-size: 1rem;
+  cursor: pointer;
+}
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.4); z-index: 40;
+}
+
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0; padding: 80px 20px 32px; }
+  .sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+  .sidebar-overlay.show { display: block; }
+}
+/* Sidebar scrollable when content is long */
+.sidebar nav {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.sidebar nav::-webkit-scrollbar {
+  width: 3px;
+}
+
+.sidebar nav::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 99px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
