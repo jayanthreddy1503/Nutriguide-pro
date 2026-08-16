@@ -11,4 +11,4 @@
 // no trailing slash, e.g.:
 //   const BACKEND_URL = 'https://nutriguide-api.onrender.com';
 // ─────────────────────────────────────────────────────────────────────────
-const BACKEND_URL = '';
+const BACKEND_URL = 'https://nutriguide-api-smgk.onrender.com';
