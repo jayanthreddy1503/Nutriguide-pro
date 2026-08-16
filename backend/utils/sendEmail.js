@@ -1,36 +1,26 @@
-// Real transactional email via Resend's SMTP relay, sent through Nodemailer.
-// Resend SMTP credentials: host smtp.resend.com, user is literally "resend",
-// and the password is your Resend API key (https://resend.com/api-keys).
-// Docs: https://resend.com/docs/send-with-smtp
-const nodemailer = require("nodemailer");
+// Real transactional email via Resend's HTTPS API (not SMTP).
+//
+// We deliberately use Resend's HTTP API instead of their SMTP relay.
+// Some hosts (Render's free tier among them) throttle or block outbound
+// SMTP connections (port 465/587), which shows up as ETIMEDOUT /
+// "Connection timeout" errors that have nothing to do with your API key
+// or Resend account — the request just never reaches the SMTP server.
+// The HTTPS API runs over plain port 443, exactly like any other API call
+// this server already makes, so it isn't affected by that.
+// Docs: https://resend.com/docs/api-reference/emails/send-email
+const fetch = require("node-fetch");
 
-let transporter = null;
+const RESEND_API_URL = "https://api.resend.com/emails";
 
-function getTransporter() {
-  if (transporter) return transporter;
-
+// Sends the OTP email. Kept as its own function (rather than a generic
+// "sendEmail") so the HTML template lives in one obvious place.
+async function sendOtpEmail({ to, name, otp }) {
   if (!process.env.RESEND_API_KEY) {
     throw new Error(
       "RESEND_API_KEY is not set. Add it to your .env file — see .env.example."
     );
   }
 
-  transporter = nodemailer.createTransport({
-    host: "smtp.resend.com",
-    port: 465,
-    secure: true, // true for port 465 (SSL)
-    auth: {
-      user: "resend",
-      pass: process.env.RESEND_API_KEY
-    }
-  });
-
-  return transporter;
-}
-
-// Sends the OTP email. Kept as its own function (rather than a generic
-// "sendEmail") so the HTML template lives in one obvious place.
-async function sendOtpEmail({ to, name, otp }) {
   const fromAddress = process.env.EMAIL_FROM || "NutriGuide Pro <onboarding@resend.dev>";
 
   const html = `
@@ -54,15 +44,29 @@ async function sendOtpEmail({ to, name, otp }) {
 
   const text = `Your NutriGuide Pro verification code is ${otp}. It expires in 10 minutes.`;
 
-  const info = await getTransporter().sendMail({
-    from: fromAddress,
-    to,
-    subject: "Your NutriGuide Pro verification code",
-    text,
-    html
+  const response = await fetch(RESEND_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      from: fromAddress,
+      to,
+      subject: "Your NutriGuide Pro verification code",
+      text,
+      html
+    })
   });
 
-  return info;
+  if (!response.ok) {
+    const errBody = await response.text().catch(() => "");
+    throw new Error(
+      `Resend API error (${response.status}): ${errBody || response.statusText}`
+    );
+  }
+
+  return response.json();
 }
 
 // Minimal HTML-escaping for values interpolated into the email template.
