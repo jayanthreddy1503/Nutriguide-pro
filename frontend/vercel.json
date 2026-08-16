@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "https://nutriguide-api-smgk.onrender.com/api/:path*" }
-  ]
-}

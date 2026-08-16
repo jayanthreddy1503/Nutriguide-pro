@@ -11,7 +11,8 @@ const {
   logoutUser,
   getMe,
   getStats,
-  handleOAuthSuccess
+  handleOAuthSuccess,
+  exchangeOAuthCode
 } = require("../controllers/authController");
 
 const { protect } = require("../middleware/authMiddleware");
@@ -43,9 +44,14 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     session: false,
-    failureRedirect: `${process.env.CLIENT_URL || ""}/login.html?error=oauth`
+    failureRedirect: `${(process.env.CLIENT_URL || "").split(",")[0].trim()}/login.html?error=oauth`
   }),
   handleOAuthSuccess
 );
+
+// Step 3: frontend exchanges the one-time code (from the redirect above)
+// for the real auth cookie via a direct fetch call — see comments in
+// authController.exchangeOAuthCode for why this extra step exists.
+router.post("/oauth/exchange", exchangeOAuthCode);
 
 module.exports = router;

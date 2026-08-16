@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const { issueAuthCookie, clearAuthCookie } = require("../utils/token");
+const { issueAuthCookie, clearAuthCookie, signExchangeCode, verifyExchangeCode } = require("../utils/token");
 const { sendOtpEmail } = require("../utils/sendEmail");
 const {
   generateOTP,
@@ -349,14 +349,60 @@ exports.getStats = async (req, res) => {
 
 // ---------------------------------------------------------------------------
 // Called from the Google OAuth callback route once Passport has
-// resolved (or created) the user. Mints our own JWT cookie and redirects
-// back into the frontend app — the OAuth flow ends up looking, from the
-// browser's perspective, just like a normal login.
+// resolved (or created) the user.
+//
+// IMPORTANT: we deliberately do NOT set the real auth cookie here. This
+// redirect (Google -> our API -> the frontend) makes our API's origin look
+// like a transient "bounce" hop with no direct user interaction, and
+// Chrome's Bounce Tracking Mitigations can wipe cookies set during that
+// hop shortly afterwards. Instead we mint a short-lived one-time exchange
+// code and hand it to the frontend via the URL; the frontend exchanges it
+// for the real cookie with a normal fetch() call (see exchangeOAuthCode
+// below), which is not part of any redirect chain.
 // ---------------------------------------------------------------------------
 exports.handleOAuthSuccess = (req, res) => {
   const user = req.user; // set by Passport's strategy `done(null, user)`
-  issueAuthCookie(res, user._id);
+  const code = signExchangeCode(user._id);
 
-  const frontendUrl = process.env.CLIENT_URL || "http://localhost:3000";
-  res.redirect(`${frontendUrl}/oauth-success.html`);
+  // CLIENT_URL may be a comma-separated list (multiple allowed origins) —
+  // use the first one as the actual redirect target.
+  const frontendUrl = (process.env.CLIENT_URL || "http://localhost:3000")
+    .split(",")[0]
+    .trim();
+
+  res.redirect(`${frontendUrl}/oauth-success.html?code=${code}`);
+};
+
+// ---------------------------------------------------------------------------
+// POST /api/auth/oauth/exchange
+// Body: { code }
+// Called directly (via fetch, not a redirect) by oauth-success.html right
+// after landing there. Verifies the one-time code from handleOAuthSuccess
+// and — only now — sets the real httpOnly auth cookie on this direct
+// response, then returns the user profile.
+// ---------------------------------------------------------------------------
+exports.exchangeOAuthCode = async (req, res) => {
+  try {
+    const { code } = req.body;
+    if (!code) {
+      return res.status(400).json({ success: false, message: "Missing code." });
+    }
+
+    let userId;
+    try {
+      userId = verifyExchangeCode(code);
+    } catch {
+      return res.status(401).json({ success: false, message: "Invalid or expired code." });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found." });
+    }
+
+    issueAuthCookie(res, user._id);
+    return res.status(200).json({ success: true, user: publicUser(user) });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: "Something went wrong completing sign-in." });
+  }
 };

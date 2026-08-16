@@ -28,15 +28,30 @@
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script>
-    // The OAuth callback already set our httpOnly JWT cookie server-side.
-    // We just need to fetch the profile once to populate the local UI cache,
-    // then continue on to the dashboard like any other successful login.
+    // The OAuth callback redirected here with a short-lived, single-use
+    // ?code=... in the URL (NOT the real auth cookie — see
+    // authController.handleOAuthSuccess for why). We exchange it here via
+    // a direct fetch() call, which is what actually sets the real httpOnly
+    // cookie. Doing it this way (instead of setting the cookie during the
+    // Google -> API -> frontend redirect chain) avoids Chrome's Bounce
+    // Tracking Mitigations wiping the cookie right after the redirect.
     (async () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('code');
+
+      if (!code) {
+        window.location.href = 'login.html?error=oauth';
+        return;
+      }
+
       try {
-        const data = await apiRequest('/auth/me');
+        const data = await apiRequest('/auth/oauth/exchange', {
+          method: 'POST',
+          body: { code }
+        });
         Auth.setSession(data.user);
       } catch (err) {
-        // Cookie wasn't set / request failed — send them back to try again.
+        // Code invalid/expired/exchange failed — send them back to try again.
         window.location.href = 'login.html?error=oauth';
         return;
       }
