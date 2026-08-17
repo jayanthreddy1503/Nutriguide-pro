@@ -67,7 +67,7 @@ async function loadAllRemedies() {
   if (errorEl)   errorEl.style.display   = 'none';
 
   try {
-    const res  = await fetch('/api/remedies');
+    const res  = await fetch(`${(typeof BACKEND_URL !== 'undefined' && BACKEND_URL) || ''}/api/remedies`);
     const data = await res.json();
 
     if (!data.success) {
@@ -138,7 +138,7 @@ async function showRemedy(problemName) {
 
   try {
     const res  = await fetch(
-      '/api/remedies/' + encodeURIComponent(problemName)
+      `${(typeof BACKEND_URL !== 'undefined' && BACKEND_URL) || ''}/api/remedies/` + encodeURIComponent(problemName)
     );
     const data = await res.json();
 
@@ -266,7 +266,7 @@ async function searchRemedies(keyword) {
 
   try {
     const res  = await fetch(
-      '/api/remedies/search?q=' + encodeURIComponent(keyword)
+      `${(typeof BACKEND_URL !== 'undefined' && BACKEND_URL) || ''}/api/remedies/search?q=` + encodeURIComponent(keyword)
     );
     const data = await res.json();
 

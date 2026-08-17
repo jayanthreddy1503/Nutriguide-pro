@@ -298,7 +298,7 @@ function showFallback() {
 // ── Fetch weather from backend ─────────────────
 async function fetchWeather() {
   try {
-    const res  = await fetch('/api/weather/current');
+    const res  = await fetch(`${(typeof BACKEND_URL !== 'undefined' && BACKEND_URL) || ''}/api/weather/current`);
     const data = await res.json();
 
     if (data.success) {
