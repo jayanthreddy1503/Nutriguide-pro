@@ -74,6 +74,11 @@
   justify-content: center;
   gap: 6px;
 }
+
+@media (max-width: 400px) {
+  .otp-inputs { gap: 6px; }
+  .otp-box { width: 38px; height: 46px; font-size: 1.2rem; }
+}
 .link-btn {
   background: none;
   border: none;

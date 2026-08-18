@@ -57,7 +57,7 @@ const nutritionData = {
 
 function analyzeNutrition() {
   const symptom = document.getElementById('symptom').value;
-  if (!symptom) { alert('Please select a symptom.'); return; }
+  if (!symptom) { toast('Please select a symptom.', 'warning'); return; }
 
   const d = nutritionData[symptom];
   document.getElementById('emptyCard').style.display = 'none';

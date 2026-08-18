@@ -105,7 +105,7 @@ function renderHistory() {
 function logWeight() {
   const val = parseFloat(document.getElementById('newWeight').value);
   if (!val || val < 20 || val > 300) {
-    alert('Please enter a valid weight (20–300 kg).');
+    toast('Please enter a valid weight (20–300 kg).', 'warning');
     return;
   }
   const now = new Date();

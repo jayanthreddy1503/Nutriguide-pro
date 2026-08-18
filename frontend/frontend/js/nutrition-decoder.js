@@ -555,7 +555,8 @@ async function loadHistory() {
 async function deleteHistoryLog(logId) {
   if (!Auth.isLoggedIn()) return;
 
-  if (!confirm('Delete this scan from your history?')) return;
+  const ok = await confirmDialog('Delete this scan from your history?', { confirmText: 'Delete' });
+  if (!ok) return;
 
   try {
     const res  = await fetch(
@@ -569,12 +570,13 @@ async function deleteHistoryLog(logId) {
 
     if (data.success) {
       loadHistory();
+      toast('Scan deleted from history.', 'success');
     } else {
-      alert('Could not delete. Please try again.');
+      toast('Could not delete. Please try again.', 'error');
     }
   } catch (err) {
     console.warn('Delete error:', err.message);
-    alert('Could not delete. Please try again.');
+    toast('Could not delete. Please try again.', 'error');
   }
 }
 
@@ -594,10 +596,7 @@ async function decodeLabel() {
 
     // Negative number check
     if (val < 0) {
-      alert(
-        `❌ ${NUTRIENTS[key].label} cannot be negative.\n` +
-        `Please enter 0 or above.`
-      );
+      toast(`${NUTRIENTS[key].label} cannot be negative. Please enter 0 or above.`, 'error');
       el.focus();
       el.style.borderColor = '#ef4444';
       return;
@@ -605,10 +604,7 @@ async function decodeLabel() {
 
     // Unrealistic calories check
     if (key === 'calories' && val > 5000) {
-      alert(
-        `❌ Calories value ${val} seems too high for one serving.\n` +
-        `Normal range is 0–1000 kcal. Please double-check.`
-      );
+      toast(`Calories value ${val} seems too high for one serving. Normal range is 0–1000 kcal — please double-check.`, 'error');
       el.focus();
       el.style.borderColor = '#ef4444';
       return;
@@ -624,7 +620,7 @@ async function decodeLabel() {
 
   // No values entered
   if (!hasAny) {
-    alert('Please enter at least one nutrition value before decoding.');
+    toast('Please enter at least one nutrition value before decoding.', 'warning');
     return;
   }
   // Cross validation — added sugar cannot exceed total sugar
@@ -633,11 +629,7 @@ async function decodeLabel() {
     values.sugar      !== undefined
   ) {
     if (values.addedSugar > values.sugar) {
-      alert(
-        `❌ Added Sugar (${values.addedSugar}g) cannot be more ` +
-        `than Total Sugar (${values.sugar}g).\n\n` +
-        `Please recheck the nutrition label.`
-      );
+      toast(`Added Sugar (${values.addedSugar}g) cannot be more than Total Sugar (${values.sugar}g). Please recheck the nutrition label.`, 'error');
       const addedEl = document.getElementById('inp-added-sugar');
       if (addedEl) {
         addedEl.focus();
@@ -660,13 +652,7 @@ async function decodeLabel() {
       (values.carbs   * 4);
 
     if (estimated > values.calories * 1.5) {
-      alert(
-        `⚠️ Note: Your macronutrient values suggest approx ` +
-        `${Math.round(estimated)} kcal, but you entered ` +
-        `${values.calories} kcal.\n\n` +
-        `Please verify values from the label.\n` +
-        `Continuing with your entered values.`
-      );
+      toast(`Your macronutrients suggest approx ${Math.round(estimated)} kcal, but you entered ${values.calories} kcal. Continuing with your entered values — verify against the label if unsure.`, 'warning', 5500);
     }
   }
 
@@ -727,7 +713,7 @@ async function decodeLabel() {
 
   } catch (err) {
     console.error('Decode error:', err);
-    alert('Something went wrong during analysis. Please try again.');
+    toast('Something went wrong during analysis. Please try again.', 'error');
   }
 
   // Always re-enable button

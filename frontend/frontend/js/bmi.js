@@ -45,7 +45,7 @@ function calculateBMI() {
   const gender = document.getElementById('genderInput').value;
 
   if (!height || !weight || height <= 0 || weight <= 0) {
-    alert('Please enter valid height and weight.'); return;
+    toast('Please enter valid height and weight.', 'warning'); return;
   }
 
   const h = height / 100;
