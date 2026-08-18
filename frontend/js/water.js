@@ -25,7 +25,7 @@ function render() {
 
 function addWater(ml) {
   if (data.amount >= GOAL) {
-    toast('🎉 Daily goal already reached!', 'success');
+    alert('🎉 Daily goal already reached!');
     return;
   }
   data.amount = Math.min(data.amount + ml, GOAL);
@@ -39,13 +39,11 @@ function addWater(ml) {
   render();
 }
 
-async function resetWater() {
-  const ok = await confirmDialog('Reset today\'s water intake?', { confirmText: 'Reset' });
-  if (!ok) return;
+function resetWater() {
+  if (!confirm('Reset today\'s water intake?')) return;
   data = { amount: 0, log: [] };
   localStorage.setItem('nutriguide_water', JSON.stringify(data));
   render();
-  toast('Water intake reset.', 'success');
 }
 
 render();

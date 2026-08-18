@@ -44,8 +44,8 @@ function addFoodItem() {
   const foodKey = document.getElementById('foodName').value;
   const weight  = parseFloat(document.getElementById('foodWeight').value);
 
-  if (!foodKey) { toast('Please select a food.', 'warning'); return; }
-  if (!weight || weight <= 0) { toast('Please enter a valid weight in grams.', 'warning'); return; }
+  if (!foodKey) { alert('Please select a food.'); return; }
+  if (!weight || weight <= 0) { alert('Please enter a valid weight in grams.'); return; }
 
   const food = foodDB[foodKey];
   const factor = weight / 100;
@@ -70,23 +70,18 @@ function removeItem(index) {
   renderLog();
 }
 
-async function clearAll() {
+function clearAll() {
   if (foodLog.length === 0) return;
-  const ok = await confirmDialog('Clear all food items from today\'s log?', { confirmText: 'Clear All' });
-  if (!ok) return;
+  if (!confirm('Clear all food items?')) return;
   foodLog = [];
   renderLog();
-  toast('Food log cleared.', 'success');
 }
 
 function renderLog() {
-  // Number(...) guards against any non-numeric value ever ending up in the
-  // log (e.g. from a future API change) so totals never silently break into
-  // string concatenation or NaN.
-  const totalCal     = foodLog.reduce((s, f) => s + (Number(f.cal)     || 0), 0);
-  const totalProtein = foodLog.reduce((s, f) => s + (Number(f.protein) || 0), 0);
-  const totalCarbs   = foodLog.reduce((s, f) => s + (Number(f.carbs)   || 0), 0);
-  const totalFat     = foodLog.reduce((s, f) => s + (Number(f.fat)     || 0), 0);
+  const totalCal     = foodLog.reduce((s, f) => s + f.cal,     0);
+  const totalProtein = foodLog.reduce((s, f) => s + f.protein, 0);
+  const totalCarbs   = foodLog.reduce((s, f) => s + f.carbs,   0);
+  const totalFat     = foodLog.reduce((s, f) => s + f.fat,     0);
 
   document.getElementById('totalCal').textContent     = totalCal.toFixed(0);
   document.getElementById('totalProtein').textContent = totalProtein.toFixed(1) + 'g';
@@ -166,17 +161,6 @@ async function identifyFoodWithAI() {
     return;
   }
 
-  // Helper: coerce whatever the API returns (string, number, null, undefined)
-  // into a clean, rounded number. Without this, values that arrive as
-  // strings (e.g. "155" instead of 155) get summed with `+` in renderLog()
-  // as string concatenation instead of addition, which is why totals used
-  // to come out wrong (or NaN) whenever an AI-identified item was in the log.
-  function toCleanNumber(value, decimals = 1) {
-    const n = Number(value);
-    if (!Number.isFinite(n) || n < 0) return 0;
-    return +n.toFixed(decimals);
-  }
-
   btn.disabled = true;
   const originalHtml = btn.innerHTML;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Identifying...';
@@ -187,35 +171,22 @@ async function identifyFoodWithAI() {
       body: { description }
     });
 
-    const items = Array.isArray(data.items) ? data.items : [];
-    if (items.length === 0) {
-      msg.textContent = 'No food items could be identified from that description. Try being more specific (e.g. "150g grilled chicken").';
-      msg.classList.remove('hidden');
-      msg.classList.add('error');
-      return;
-    }
-
-    items.forEach(item => {
-      // Every numeric field is coerced through toCleanNumber() so the log
-      // always stores real numbers — this is what was making the totals in
-      // "Food Log" calculate incorrectly (or show NaN) after using the AI
-      // identifier, since renderLog() sums these fields with `+`.
+    data.items.forEach(item => {
       foodLog.push({
         key: 'ai_' + Date.now() + Math.random(),
-        label: item.name || 'Unknown item',
-        weight: toCleanNumber(item.estimatedWeightGrams, 0) || 100,
-        cal:     toCleanNumber(item.calories, 1),
-        protein: toCleanNumber(item.protein,  1),
-        carbs:   toCleanNumber(item.carbs,    1),
-        fat:     toCleanNumber(item.fat,      1),
+        label: item.name,
+        weight: item.estimatedWeightGrams,
+        cal: item.calories,
+        protein: item.protein,
+        carbs: item.carbs,
+        fat: item.fat,
       });
     });
 
     renderLog();
     input.value = '';
-    msg.textContent = `✅ Added ${items.length} item${items.length > 1 ? 's' : ''} (${data.source === 'ai' ? 'AI-identified' : 'matched from food database'}).`;
+    msg.textContent = `✅ Added ${data.items.length} item${data.items.length > 1 ? 's' : ''} (${data.source === 'ai' ? 'AI-identified' : 'matched from food database'}).`;
     msg.classList.remove('hidden');
-    toast(`Added ${items.length} item${items.length > 1 ? 's' : ''} to your food log.`, 'success');
 
   } catch (err) {
     msg.textContent = err.message;
